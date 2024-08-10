@@ -13,6 +13,7 @@ class TransactionSerializerBasic(serializers.ModelSerializer):
         fields = ['date', 'type', 'amount', 'balance']
 
 class TransactionSerializer(serializers.ModelSerializer):
+    balance = serializers.DecimalField(source='balance_after', max_digits=10, decimal_places=2,read_only=True)
     class Meta:
         model = Transaction
-        fields = '__all__'
+        fields = ['id','type', 'amount', 'account', 'balance']  

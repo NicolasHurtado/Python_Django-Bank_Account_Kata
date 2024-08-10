@@ -25,12 +25,6 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     balance_after = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
-    def clean(self):
-        print('self.amount ',self.amount)
-        print('self.account.balance ',self.account.balance)
-
-        if self.type in [self.WITHDRAWAL, self.TRANSFER] and self.account.balance < self.amount:
-            raise ValidationError('Insufficient funds for this transaction.')
 
     def save(self, *args, **kwargs):
         if self.type == self.WITHDRAWAL or self.type == self.TRANSFER:
