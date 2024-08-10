@@ -46,7 +46,8 @@ This is an API for managing bank accounts and associated transactions. The appli
 ### Access the Swagger documentation
 Open your web browser and go to: http://localhost:8000/swagger/
 
-![alt text](image-11.png)
+![image](https://github.com/user-attachments/assets/bce135f6-8dde-4545-a48c-f97695bedd26)
+
 
 ## Key Endpoints
 
@@ -55,7 +56,8 @@ Open your web browser and go to: http://localhost:8000/swagger/
 - **List and Create Accounts**: `GET /accounts/` and `POST /accounts/`
 - **Account Details**: `GET /accounts/{id}/`
 
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/7c51bc53-2133-483d-b387-7be1a8533887)
+
 
 ### Transactions
 
@@ -65,7 +67,8 @@ Open your web browser and go to: http://localhost:8000/swagger/
     - `start_date` and `end_date`: Filter by date range.
     - `ordering`: Sort transactions by date (`date` or `-date`).
 - **Transaction Details**: `GET /transactions/{id}/`
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/5c3ad5ab-bddc-49c8-bc85-99110170fd61)
+
 
 ## Use Cases using Swagger
 
@@ -75,38 +78,47 @@ Users can create a new account by providing a unique IBAN and an optional initia
 
 **Request Example :**
 
-![alt text](image-2.png)
+![image](https://github.com/user-attachments/assets/068f1c98-c63f-4439-a337-a8524660f3f0)
+
 
 **Response  Example :**
-![alt text](image-3.png)
+![image](https://github.com/user-attachments/assets/cf130b6c-7381-401f-8d2c-60e7f2f28c44)
+
 
 ### 2. **Make a Transaction**
 Users can make a transaction to a specific type (deposit, withdrawal, transfer).
 Account field is The account related to the transaction
 **Request Example :**
-![alt text](image-4.png)
+![image](https://github.com/user-attachments/assets/ebcc2516-c18e-416e-aa60-3cca8735cdb0)
+
 
 **Response  Example :**
-![alt text](image-5.png)
+![image](https://github.com/user-attachments/assets/9830b1fc-ef42-4c4e-bcff-816a4b7fec98)
+
 
 ### 3. **Make a Failed Transaction**
 Validates that sufficient funds are available for withdrawal or transfer transactions
 **Request Example :**
-![alt text](image-6.png)
+![image](https://github.com/user-attachments/assets/03778145-68d8-4a9d-b8f6-c6162a03a197)
+
 
 **Response  Example :**
-![alt text](image-7.png)
+![image](https://github.com/user-attachments/assets/f6026b2a-202c-4eb9-afdd-ff98b6e75d49)
+
 
 ### 4. **Make a Query Transaction History**
 Users can query the transaction history, sort by date (in ascending and descending order), filtering by transaction type and date range.
-![alt text](image-8.png)
+![image](https://github.com/user-attachments/assets/14e9a4b4-a7a7-4747-85ed-bb9388e2753c)
+
 
 **Request Example :**
 http://127.0.0.1:8000/api/transactions/?type=transfer&type=withdrawal&start_date=2024-08-09&end_date=2024-08-11&ordering=-date&page=1
 
-![alt text](image-9.png)
+![image](https://github.com/user-attachments/assets/b3ea1911-935d-4031-862a-27ba39771ecb)
+
 
 **Response  Example :**
-![alt text](image-10.png)
+![image](https://github.com/user-attachments/assets/e44a1f5d-820b-42ea-8a43-b99b2082468a)
+
 
 ***Nicolas Hurtado C***
