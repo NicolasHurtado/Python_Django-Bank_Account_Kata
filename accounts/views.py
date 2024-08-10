@@ -15,6 +15,13 @@ class AccountListCreate(generics.ListCreateAPIView):
 
 
 class TransactionListCreate(generics.ListCreateAPIView):
+    """
+    API view to list and create transactions.
+
+    - GET: Retrieve a list of transactions with optional filters for type, date range, and ordering.
+    - POST: Create a new transaction, ensuring that there are sufficient funds for withdrawals or transfers.
+    """
+
     queryset = Transaction.objects.all().order_by('-date')
     serializer_class = TransactionSerializerBasic
     create_serializer_class = TransactionSerializer
@@ -24,14 +31,18 @@ class TransactionListCreate(generics.ListCreateAPIView):
     pagination_class = StandardResultsSetPagination
 
     def get_serializer_class(self):
+        """
+        Return the appropriate serializer class based on the request method.
+        """
         if self.request.method == 'POST':
-            return self.create_serializer_class  # Serializador para creación
-        return self.serializer_class  # Serializador para listado
+            return self.create_serializer_class 
+        return self.serializer_class 
+    
     @swagger_auto_schema(
         operation_description="Retrieve a list of transactions, optionally filtered by type or date range.",
         responses={200: TransactionSerializerBasic(many=True)},
         manual_parameters=[
-            openapi.Parameter('type', openapi.IN_QUERY, description="Filter by transaction type (deposit-withdrawal-transfer)", type=openapi.TYPE_STRING),
+            openapi.Parameter('type', openapi.IN_QUERY, description="Filter by transaction type (deposit, withdrawal, transfer)", type=openapi.TYPE_ARRAY,items=openapi.Items(type=openapi.TYPE_STRING),collection_format='multi'),
             openapi.Parameter('start_date', openapi.IN_QUERY, description="Filter transactions after this date (yyyy-mm-dd)", type=openapi.TYPE_STRING, format=openapi.FORMAT_DATE),
             openapi.Parameter('end_date', openapi.IN_QUERY, description="Filter transactions before this date (yyyy-mm-dd)", type=openapi.TYPE_STRING, format=openapi.FORMAT_DATE),
             openapi.Parameter('ordering', openapi.IN_QUERY, description="Sort account statement by date in ascending(date) and descending order(-date).", type=openapi.TYPE_STRING, format=openapi.FORMAT_DATE),
@@ -47,17 +58,6 @@ class TransactionListCreate(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
-    def perform_create(self, serializer):
-        account = serializer.validated_data['account']
-        amount = serializer.validated_data['amount']
-        transaction_type = serializer.validated_data['type']
-
-        # Validar fondos antes de crear la transacción
-        if transaction_type in [Transaction.WITHDRAWAL, Transaction.TRANSFER] and account.balance < amount:
-            raise ValidationError('Insufficient funds for this transaction.')
-
-        # Si la validación es exitosa, se guarda la transacción
-        serializer.save()
 
 class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()
