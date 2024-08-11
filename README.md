@@ -34,7 +34,7 @@ This is an API for managing bank accounts and associated transactions. The appli
 
 4. **Apply migrations**
     
-By default, this application uses SQLite as its database. SQLite is a lightweight, file-based database that is easy to set up and works well for development and small-scale applications. The database file (`db.sqlite3`) is stored in the root of the project       directory.
+- By default, this application uses SQLite as its database. SQLite is a lightweight, file-based database that is easy to set up and works well for development and small-scale applications. The database file (`db.sqlite3`) is stored in the root of the project       directory.
     - python manage.py makemigrations
     - python manage.py migrate
 
