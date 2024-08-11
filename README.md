@@ -43,6 +43,9 @@ This is an API for managing bank accounts and associated transactions. The appli
 6. **(Optional) Start the application with Docker**
     - docker-compose up --build
 
+7. **Run unit tests**
+    - python manage.py test
+
 
 ### Access the Swagger documentation
 Open your web browser and go to: http://localhost:8000/swagger/
